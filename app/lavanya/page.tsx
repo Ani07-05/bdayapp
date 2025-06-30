@@ -10,11 +10,13 @@ export default function LavanyaPage() {
         <div className="bday-photo-confetti">
           <img src="/lavanya.jpeg" alt="Lavanya" className="bday-photo-rect" />
         </div>
-        <figcaption className="bday-photo-legend">Lavanya at her last birthday celebration</figcaption>
+        <figcaption className="bday-photo-legend">trying not to laugh at extremely serious situations</figcaption>
       </figure>
       <section className="bday-message-section">
         <h1 className="bday-heading">Happy Birthday, Lavanya!</h1>
         <div className="bday-message-body">
+          जन्मदिनस्य हार्दिक शुभाशयाः, लावण्या।<br/>
+          ಜನ್ಮದಿನದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು, ಲಾವಣ್ಯಾ।<br/>
           Wishing you a day filled with joy, love, and laughter.<br/>
           May all your dreams come true!<br/>
           THANK YOU FOR ALWAYS BEING GREAT HOMIE,<br/>
@@ -31,7 +33,6 @@ export default function LavanyaPage() {
           Through every season, day and night! :D <br/>
           <br/>
           &mdash; Aniruddha <br/>
-          <span className="devanagari">आपका दिन शुभ हो!</span>
         </div>
       </section>
     </main>
