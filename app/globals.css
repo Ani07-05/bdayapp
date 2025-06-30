@@ -1,0 +1,322 @@
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorialNew-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background: #0a0a0a;
+  color: #ededed;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.homepage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-names {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2rem;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+}
+
+.homepage-title {
+  font-size: 2.5rem;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.marquee {
+  position: relative;
+  width: 200px;
+  height: 2.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-content {
+  display: flex;
+  flex-direction: column;
+  animation: marquee-vertical 8s linear infinite;
+}
+
+.marquee-name {
+  margin: 0.25rem 0;
+  font-size: 2rem;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+}
+
+@keyframes marquee-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.scroll-box {
+  height: 48px;
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+.scroll-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: scrollUp 4s linear infinite;
+}
+.scroll-item {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 12px 0;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+}
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-80%); }
+}
+
+.bday-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #ededed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.bday-image-container {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #222;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+}
+
+.bday-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bday-message {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  line-height: 1.3;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.confetti {
+  width: 100%;
+  height: 60px;
+  background: repeating-radial-gradient(circle at 10% 40%, #fff 0 2px, transparent 2px 20px),
+              repeating-radial-gradient(circle at 80% 60%, #ffb800 0 2px, transparent 2px 18px),
+              repeating-radial-gradient(circle at 50% 80%, #ff4d6d 0 2px, transparent 2px 22px);
+  animation: confetti 2s linear infinite;
+  margin-top: 2rem;
+}
+
+@keyframes confetti {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
+}
+
+.bday-side-layout {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  flex-wrap: wrap;
+}
+
+.bday-photo-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.bday-photo-confetti {
+  padding: 8px;
+  border-radius: 1rem;
+  background: repeating-radial-gradient(circle at 10% 40%, #fff 0 2px, transparent 2px 20px),
+              repeating-radial-gradient(circle at 80% 60%, #ffb800 0 2px, transparent 2px 18px),
+              repeating-radial-gradient(circle at 50% 80%, #ff4d6d 0 2px, transparent 2px 22px);
+  animation: confetti 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bday-photo-rect {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  display: block;
+}
+
+.bday-photo-legend {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  color: #bdbdbd;
+  text-align: center;
+  font-style: italic;
+  max-width: 220px;
+}
+
+.bday-message-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 400px;
+}
+
+.bday-heading {
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.bday-message-body {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #ededed;
+  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+}
+
+.devanagari {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  color: #ffe082;
+  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+}
+
+@media (max-width: 900px) {
+  .bday-side-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .bday-message-section {
+    align-items: center;
+    max-width: 90vw;
+  }
+}
+
+@keyframes confetti {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
+}
+
+.confetti-blast {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  overflow: visible;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 18px;
+  border-radius: 2px;
+  opacity: 0.85;
+  animation: confetti-blast-fall 1.8s cubic-bezier(.6,.3,.3,1) forwards;
+}
+
+/* 8 color/angle variations for variety */
+.confetti-piece-0 { background: #ffb800; transform: rotate(12deg); animation-delay: 0.0s; }
+.confetti-piece-1 { background: #ff4d6d; transform: rotate(-8deg); animation-delay: 0.1s; }
+.confetti-piece-2 { background: #fff; transform: rotate(24deg); animation-delay: 0.2s; }
+.confetti-piece-3 { background: #6ee7b7; transform: rotate(-16deg); animation-delay: 0.05s; }
+.confetti-piece-4 { background: #60a5fa; transform: rotate(32deg); animation-delay: 0.15s; }
+.confetti-piece-5 { background: #f472b6; transform: rotate(-24deg); animation-delay: 0.12s; }
+.confetti-piece-6 { background: #fde68a; transform: rotate(8deg); animation-delay: 0.18s; }
+.confetti-piece-7 { background: #a78bfa; transform: rotate(-32deg); animation-delay: 0.08s; }
+
+@keyframes confetti-blast-fall {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--angle, 0deg));
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--x, 0px)),
+        calc(-50% + var(--y, 0px))
+      )
+      scale(0.9)
+      rotate(var(--angle, 0deg));
+  }
+}
+
+/* Custom properties for each piece (JS-free, just CSS randomness) */
+.confetti-piece-0 { --x: -220px; --y: -320px; --angle: 12deg; }
+.confetti-piece-1 { --x: 180px; --y: -340px; --angle: -8deg; }
+.confetti-piece-2 { --x: -120px; --y: -300px; --angle: 24deg; }
+.confetti-piece-3 { --x: 90px; --y: -260px; --angle: -16deg; }
+.confetti-piece-4 { --x: -180px; --y: -220px; --angle: 32deg; }
+.confetti-piece-5 { --x: 220px; --y: -200px; --angle: -24deg; }
+.confetti-piece-6 { --x: -60px; --y: -180px; --angle: 8deg; }
+.confetti-piece-7 { --x: 140px; --y: -120px; --angle: -32deg; }
+.confetti-piece-8 { --x: -200px; --y: -100px; --angle: 16deg; }
+.confetti-piece-9 { --x: 200px; --y: -80px; --angle: -12deg; }
+.confetti-piece-10 { --x: -100px; --y: -60px; --angle: 28deg; }
+.confetti-piece-11 { --x: 120px; --y: -40px; --angle: -20deg; }
+.confetti-piece-12 { --x: -160px; --y: -20px; --angle: 36deg; }
+.confetti-piece-13 { --x: 160px; --y: 0px; --angle: -28deg; }
+.confetti-piece-14 { --x: -80px; --y: 20px; --angle: 20deg; }
+.confetti-piece-15 { --x: 80px; --y: 40px; --angle: -36deg; }
+.confetti-piece-16 { --x: -140px; --y: 60px; --angle: 10deg; }
+.confetti-piece-17 { --x: 140px; --y: 80px; --angle: -10deg; }
+.confetti-piece-18 { --x: -60px; --y: 100px; --angle: 18deg; }
+.confetti-piece-19 { --x: 60px; --y: 120px; --angle: -18deg; }
+.confetti-piece-20 { --x: -100px; --y: 140px; --angle: 22deg; }
+.confetti-piece-21 { --x: 100px; --y: 160px; --angle: -22deg; }
+.confetti-piece-22 { --x: -40px; --y: 180px; --angle: 14deg; }
+.confetti-piece-23 { --x: 40px; --y: 200px; --angle: -14deg; } 
