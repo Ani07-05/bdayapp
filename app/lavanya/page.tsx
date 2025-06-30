@@ -10,28 +10,28 @@ export default function LavanyaPage() {
         <div className="bday-photo-confetti">
           <img src="/lavanya.jpeg" alt="Lavanya" className="bday-photo-rect" />
         </div>
-        <figcaption className="bday-photo-legend">trying not to laugh at extremely serious situations</figcaption>
+        <figcaption className="bday-photo-legend">Lavanya at her last birthday celebration</figcaption>
       </figure>
       <section className="bday-message-section">
         <h1 className="bday-heading">Happy Birthday, Lavanya!</h1>
         <div className="bday-message-body">
-        जन्मदिनस्य हार्दिक शुभाशयाः, लावण्या।<br/>
-        ಜನ್ಮದಿನದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು, ಲಾವಣ್ಯಾ।
-        THANK YOU FOR ALWAYS BEING GREAT HOMIE,<br/>
-        THANK YOU FOR LISTENING — you're never phony!<br/>
-        THANK YOU FOR BEING ONE OF THE VERY FEW PEOPLE I COULD EVER ASK FOR,<br/>
-        A friend so rare, who opens every door.<br/>
-THANK YOU FOR EVERYTHING ELSE — the big and small,
-You've been there through it all.
-NOT HOPING — but knowing with glee,
-AS YOU WILL HAVE AN AMAZING YEAR, wild and free!
-AND AN AMAZING DAY, filled with cheer,
-ONCE AGAIN HAPPIEST BIRTHDAY!
-LAVANYA, MAY THE BOND STAY strong and bright,
-Through every season, day and night! :D <br/>
-<br></br>
-— Aniruddha <br/>
-          <span className="devanagari"></span>
+          Wishing you a day filled with joy, love, and laughter.<br/>
+          May all your dreams come true!<br/>
+          THANK YOU FOR ALWAYS BEING GREAT HOMIE,<br/>
+          THANK YOU FOR LISTENING &mdash; you&apos;re never phony!<br/>
+          THANK YOU FOR BEING ONE OF THE VERY FEW PEOPLE I COULD EVER ASK FOR,<br/>
+          A friend so rare, who opens every door.<br/>
+          THANK YOU FOR EVERYTHING ELSE &mdash; the big and small,<br/>
+          You&apos;ve been there through it all.<br/>
+          NOT HOPING &mdash; but knowing with glee,<br/>
+          AS YOU WILL HAVE AN AMAZING YEAR, wild and free!<br/>
+          AND AN AMAZING DAY, filled with cheer,<br/>
+          ONCE AGAIN HAPPIEST BIRTHDAY!<br/>
+          LAVANYA, MAY THE BOND STAY strong and bright,<br/>
+          Through every season, day and night! :D <br/>
+          <br/>
+          &mdash; Aniruddha <br/>
+          <span className="devanagari">आपका दिन शुभ हो!</span>
         </div>
       </section>
     </main>
