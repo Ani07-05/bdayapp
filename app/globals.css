@@ -154,16 +154,19 @@ body {
 
 .bday-side-layout {
   min-height: 100vh;
-  max-height: 100vh;
   background: #0a0a0a;
   color: #ededed;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 3rem;
   padding: 2rem 1rem;
   flex-wrap: wrap;
   box-sizing: border-box;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
 }
 
 .bday-photo-figure {
@@ -234,14 +237,66 @@ body {
 }
 
 @media (max-width: 900px) {
+  .no-scroll {
+    overflow: visible !important;
+    max-height: none;
+  }
   .bday-side-layout {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.2rem;
+    padding: 0.5rem 0;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  .bday-photo-figure {
+    margin-bottom: 0.5rem;
+    width: 100vw;
+    max-width: 100vw;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .bday-photo-rect {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 11/15;
+    margin: 0 auto;
+    display: block;
+  }
+  .bday-photo-legend {
+    max-width: 95vw;
+    font-size: 0.95rem;
+    text-align: center;
+    margin: 0.5rem auto 0.8rem auto;
   }
   .bday-message-section {
     align-items: center;
-    max-width: 90vw;
+    max-width: 100vw;
+    width: 100vw;
+    padding: 0 0.5rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .bday-heading {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 0.7rem;
+    margin-top: 0.5rem;
+  }
+  .bday-message-body, .small-message {
+    font-size: 0.95rem;
+    text-align: center;
+    word-break: break-word;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding-bottom: 1.5rem;
   }
 }
 

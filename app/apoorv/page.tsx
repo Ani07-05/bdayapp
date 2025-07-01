@@ -1,6 +1,6 @@
 export default function ApoorvPage() {
   return (
-    <main className="bday-side-layout no-scroll">
+    <main className="bday-side-layout">
       <div className="confetti-blast">
         {Array.from({ length: 24 }).map((_, i) => (
           <span key={i} className={`confetti-piece confetti-piece-${i % 8}`}></span>
