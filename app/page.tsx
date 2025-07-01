@@ -1,5 +1,5 @@
 export default function Home() {
-  const friends = ["Lavanya", "TBA", "TBA", "TBA", "TBA"];
+  const friends = ["Lavanya", "Apoorv", "TBA", "TBA", "TBA", "TBA"];
   return (
     <main className="homepage">
       <div className="inline-names">

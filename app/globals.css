@@ -147,8 +147,14 @@ body {
   100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
 }
 
+.no-scroll {
+  overflow: hidden !important;
+  max-height: 100vh;
+}
+
 .bday-side-layout {
   min-height: 100vh;
+  max-height: 100vh;
   background: #0a0a0a;
   color: #ededed;
   display: flex;
@@ -157,6 +163,7 @@ body {
   gap: 3rem;
   padding: 2rem 1rem;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .bday-photo-figure {
@@ -319,4 +326,9 @@ body {
 .confetti-piece-20 { --x: -100px; --y: 140px; --angle: 22deg; }
 .confetti-piece-21 { --x: 100px; --y: 160px; --angle: -22deg; }
 .confetti-piece-22 { --x: -40px; --y: 180px; --angle: 14deg; }
-.confetti-piece-23 { --x: 40px; --y: 200px; --angle: -14deg; } 
+.confetti-piece-23 { --x: 40px; --y: 200px; --angle: -14deg; }
+
+.small-message {
+  font-size: 0.98rem;
+  line-height: 1.45;
+} 

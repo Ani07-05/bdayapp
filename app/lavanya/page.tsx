@@ -1,6 +1,6 @@
 export default function LavanyaPage() {
   return (
-    <main className="bday-side-layout">
+    <main className="bday-side-layout no-scroll">
       <div className="confetti-blast">
         {Array.from({ length: 24 }).map((_, i) => (
           <span key={i} className={`confetti-piece confetti-piece-${i % 8}`}></span>
@@ -10,7 +10,7 @@ export default function LavanyaPage() {
         <div className="bday-photo-confetti">
           <img src="/lavanya.jpeg" alt="Lavanya" className="bday-photo-rect" />
         </div>
-        <figcaption className="bday-photo-legend">trying not to laugh at extremely serious situations</figcaption>
+        <figcaption className="bday-photo-legend">Lavanya at her last birthday celebration</figcaption>
       </figure>
       <section className="bday-message-section">
         <h1 className="bday-heading">Happy Birthday, Lavanya!</h1>
