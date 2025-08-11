@@ -1,4 +1,4 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
 
 export default function RajathaPage() {
   return (
@@ -11,13 +11,10 @@ export default function RajathaPage() {
 
       <figure className="bday-photo-figure">
         <div className="bday-photo-confetti">
-          <Image
+          <img
             src="/rajatha.jpg"
             alt="Rajatha"
             className="bday-photo-rect"
-            width={600}
-            height={800}
-            priority
           />
         </div>
         <figcaption className="bday-photo-legend">

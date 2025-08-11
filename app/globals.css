@@ -1,3 +1,4 @@
+/* ============ Fonts ============ */
 @font-face {
   font-family: 'PP Editorial New';
   src: url('/fonts/PPEditorialNew-Regular.otf') format('opentype');
@@ -6,6 +7,7 @@
   font-display: swap;
 }
 
+/* ============ Base ============ */
 body {
   background: #0a0a0a;
   color: #ededed;
@@ -14,7 +16,7 @@ body {
   min-height: 100vh;
 }
 
-/* ==== Homepage styles ==== */
+/* ============ Home (unchanged) ============ */
 .homepage {
   min-height: 100vh;
   display: flex;
@@ -88,207 +90,110 @@ body {
   100% { transform: translateY(-80%); }
 }
 
-/* ==== Birthday page base ==== */
-.bday-page {
-  min-height: 100vh;
-  background: #0a0a0a;
-  color: #ededed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 3rem;
-}
-
-/* ==== Circular image version ==== */
-.bday-image-container {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #222;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
-}
-.bday-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ==== Message fade-in ==== */
-.bday-message {
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  font-family: 'PP Editorial New', Arial, sans-serif;
-  line-height: 1.3;
-  opacity: 0;
-  animation: fadeIn 1.2s ease 0.2s forwards;
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-/* ==== Confetti bar ==== */
-.confetti {
-  width: 100%;
-  height: 60px;
-  background: repeating-radial-gradient(circle at 10% 40%, #fff 0 2px, transparent 2px 20px),
-              repeating-radial-gradient(circle at 80% 60%, #ffb800 0 2px, transparent 2px 18px),
-              repeating-radial-gradient(circle at 50% 80%, #ff4d6d 0 2px, transparent 2px 22px);
-  animation: confetti 2s linear infinite;
-  margin-top: 2rem;
-}
-@keyframes confetti {
-  0% { background-position: 0 0, 0 0, 0 0; }
-  100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
-}
-
-/* ==== Layout container ==== */
+/* ============ Birthday Page Layout ============ */
 .no-scroll {
   overflow: hidden !important;
   max-height: 100vh;
 }
+
 .bday-side-layout {
   min-height: 100vh;
   background: #0a0a0a;
   color: #ededed;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;     /* columns align at top */
   justify-content: center;
-  gap: 3rem;
-  padding: 2rem 1rem;
+  gap: 2.25rem;
+  padding: 2.5rem 1rem 2rem;   /* push body a bit down on DESKTOP */
   flex-wrap: wrap;
   box-sizing: border-box;
   width: 100vw;
   max-width: 100vw;
-  margin: 0;
+  font-size: 0.95rem;          /* gentle zoom-out */
 }
 
-/* ==== Photo with confetti frame ==== */
+/* ============ Photo with Confetti Frame ============ */
 .bday-photo-figure {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
+  margin-top: 24px;            /* small, controlled drop (was 90px) */
 }
+
 .bday-photo-confetti {
   padding: 8px;
   border-radius: 1rem;
-  background: repeating-radial-gradient(circle at 10% 40%, #fff 0 2px, transparent 2px 20px),
-              repeating-radial-gradient(circle at 80% 60%, #ffb800 0 2px, transparent 2px 18px),
-              repeating-radial-gradient(circle at 50% 80%, #ff4d6d 0 2px, transparent 2px 22px);
+  background:
+    repeating-radial-gradient(circle at 10% 40%, #fff 0 2px, transparent 2px 20px),
+    repeating-radial-gradient(circle at 80% 60%, #ffb800 0 2px, transparent 2px 18px),
+    repeating-radial-gradient(circle at 50% 80%, #ff4d6d 0 2px, transparent 2px 22px);
   animation: confetti 2s linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .bday-photo-rect {
-  width: 260px; /* bigger image */
+  width: 360px;                /* a little wider */
   height: 360px;
   object-fit: cover;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
   display: block;
 }
+
 .bday-photo-legend {
-  margin-top: 0.75rem;
-  font-size: 1rem;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
   color: #bdbdbd;
   text-align: center;
   font-style: italic;
-  max-width: 260px;
+  max-width: 280px;
 }
 
-/* ==== Message section ==== */
+/* ============ Message Column ============ */
 .bday-message-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  max-width: 520px; /* more room for text */
+  max-width: 560px;
 }
+
 .bday-heading {
   font-family: 'PP Editorial New', Arial, sans-serif;
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
   font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 3.2vw, 3.1rem);
+  line-height: 1.12;
+  margin: 0 0 0.6rem 0;
+  text-wrap: balance;
 }
+
 .bday-message-body {
-  font-size: 1.2rem;
-  line-height: 1.75;
-  max-width: 60ch;
   font-family: 'Noto Sans Devanagari', Arial, sans-serif;
   color: #ededed;
+  font-size: 1.08rem;
+  line-height: 1.62;
+  max-width: 60ch;
+  text-wrap: pretty;
+  hyphens: manual;
+  word-break: keep-all;
 }
-.bday-message-body p {
-  margin-bottom: 1rem;
-}
+.bday-message-body p { margin: 0 0 0.75rem 0; }
+
 .small-message {
-  font-size: 1.05rem;
-  line-height: 1.5;
-  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.48;
+  margin-bottom: 0.9rem;
 }
 
-/* ==== Devanagari styling ==== */
-.devanagari {
-  display: block;
-  margin-top: 1.2rem;
-  font-size: 1.1rem;
-  color: #ffe082;
-  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
-}
-
-/* ==== Responsive ==== */
-@media (max-width: 900px) {
-  .no-scroll {
-    overflow: visible !important;
-    max-height: none;
-  }
-  .bday-side-layout {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 0.5rem 0;
-  }
-  .bday-photo-rect {
-    width: 90vw;
-    max-width: 320px;
-    height: auto;
-    aspect-ratio: 11/15;
-  }
-  .bday-photo-legend {
-    max-width: 95vw;
-    font-size: 0.95rem;
-  }
-  .bday-message-section {
-    align-items: center;
-    max-width: 95vw;
-    padding: 0 0.5rem;
-  }
-  .bday-heading {
-    font-size: 1.6rem;
-    text-align: center;
-  }
-  .bday-message-body, .small-message {
-    font-size: 1rem;
-    text-align: center;
-  }
-}
-
-/* ==== Confetti blast ==== */
+/* ============ Confetti Blast ============ */
 .confetti-blast {
   pointer-events: none;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 100;
@@ -304,15 +209,63 @@ body {
   animation: confetti-blast-fall 1.8s cubic-bezier(.6,.3,.3,1) forwards;
 }
 .confetti-piece-0 { background: #ffb800; --x: -220px; --y: -320px; --angle: 12deg; }
-.confetti-piece-1 { background: #ff4d6d; --x: 180px; --y: -340px; --angle: -8deg; }
-.confetti-piece-2 { background: #fff; --x: -120px; --y: -300px; --angle: 24deg; }
-.confetti-piece-3 { background: #6ee7b7; --x: 90px; --y: -260px; --angle: -16deg; }
+.confetti-piece-1 { background: #ff4d6d; --x: 180px;  --y: -340px; --angle: -8deg; }
+.confetti-piece-2 { background: #fff;     --x: -120px; --y: -300px; --angle: 24deg; }
+.confetti-piece-3 { background: #6ee7b7; --x: 90px;   --y: -260px; --angle: -16deg; }
 .confetti-piece-4 { background: #60a5fa; --x: -180px; --y: -220px; --angle: 32deg; }
-.confetti-piece-5 { background: #f472b6; --x: 220px; --y: -200px; --angle: -24deg; }
-.confetti-piece-6 { background: #fde68a; --x: -60px; --y: -180px; --angle: 8deg; }
-.confetti-piece-7 { background: #a78bfa; --x: 140px; --y: -120px; --angle: -32deg; }
+.confetti-piece-5 { background: #f472b6; --x: 220px;  --y: -200px; --angle: -24deg; }
+.confetti-piece-6 { background: #fde68a; --x: -60px;  --y: -180px; --angle: 8deg; }
+.confetti-piece-7 { background: #a78bfa; --x: 140px;  --y: -120px; --angle: -32deg; }
+
 @keyframes confetti-blast-fall {
   0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(var(--angle)); }
   100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.9) rotate(var(--angle)); }
 }
+@keyframes confetti {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
+}
 
+/* ============ Devanagari Highlight (optional) ============ */
+.devanagari {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: #ffe082;
+  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+}
+
+/* ============ Responsive ============ */
+@media (min-width: 1200px) {
+  .bday-side-layout { font-size: 0.93rem; }
+  .bday-message-body { max-width: 58ch; }
+}
+
+@media (max-width: 900px) {
+  .no-scroll { overflow: visible !important; max-height: none; }
+
+  .bday-side-layout {
+    padding: 1rem 0.5rem;      /* separate from top on mobile too */
+    flex-direction: column;
+    align-items: center;       /* valid value */
+    gap: 1rem;
+  }
+
+  .bday-photo-figure {
+    margin-top: 0;
+    transform: translateX(12px);   /* nudge image a bit right on mobile */
+  }
+
+  .bday-photo-rect {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 11 / 15;
+  }
+
+  .bday-photo-legend { max-width: 95vw; font-size: 0.95rem; }
+
+  .bday-message-section { align-items: center; max-width: 95vw; padding: 0 0.5rem; }
+  .bday-heading { font-size: clamp(1.6rem, 6vw, 2rem); text-align: center; margin-bottom: 0.5rem; }
+  .bday-message-body, .small-message { font-size: 1rem; text-align: center; }
+}
