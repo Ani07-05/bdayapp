@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
 }
 
+/* ==== Homepage styles ==== */
 .homepage {
   min-height: 100vh;
   display: flex;
@@ -87,6 +88,7 @@ body {
   100% { transform: translateY(-80%); }
 }
 
+/* ==== Birthday page base ==== */
 .bday-page {
   min-height: 100vh;
   background: #0a0a0a;
@@ -98,6 +100,7 @@ body {
   padding-top: 3rem;
 }
 
+/* ==== Circular image version ==== */
 .bday-image-container {
   width: 180px;
   height: 180px;
@@ -110,7 +113,6 @@ body {
   justify-content: center;
   box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
 }
-
 .bday-image {
   width: 100%;
   height: 100%;
@@ -118,6 +120,7 @@ body {
   display: block;
 }
 
+/* ==== Message fade-in ==== */
 .bday-message {
   font-size: 2.2rem;
   text-align: center;
@@ -127,11 +130,11 @@ body {
   opacity: 0;
   animation: fadeIn 1.2s ease 0.2s forwards;
 }
-
 @keyframes fadeIn {
   to { opacity: 1; }
 }
 
+/* ==== Confetti bar ==== */
 .confetti {
   width: 100%;
   height: 60px;
@@ -141,17 +144,16 @@ body {
   animation: confetti 2s linear infinite;
   margin-top: 2rem;
 }
-
 @keyframes confetti {
   0% { background-position: 0 0, 0 0, 0 0; }
   100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
 }
 
+/* ==== Layout container ==== */
 .no-scroll {
   overflow: hidden !important;
   max-height: 100vh;
 }
-
 .bday-side-layout {
   min-height: 100vh;
   background: #0a0a0a;
@@ -169,13 +171,13 @@ body {
   margin: 0;
 }
 
+/* ==== Photo with confetti frame ==== */
 .bday-photo-figure {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
 }
-
 .bday-photo-confetti {
   padding: 8px;
   border-radius: 1rem;
@@ -187,47 +189,55 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .bday-photo-rect {
-  width: 220px;
-  height: 300px;
+  width: 260px; /* bigger image */
+  height: 360px;
   object-fit: cover;
   border-radius: 0.75rem;
   box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
   display: block;
 }
-
 .bday-photo-legend {
   margin-top: 0.75rem;
   font-size: 1rem;
   color: #bdbdbd;
   text-align: center;
   font-style: italic;
-  max-width: 220px;
+  max-width: 260px;
 }
 
+/* ==== Message section ==== */
 .bday-message-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 400px;
+  max-width: 520px; /* more room for text */
 }
-
 .bday-heading {
   font-family: 'PP Editorial New', Arial, sans-serif;
-  font-size: 2.2rem;
-  margin-bottom: 1.2rem;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
   font-weight: 400;
+  line-height: 1.2;
 }
-
 .bday-message-body {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #ededed;
+  font-size: 1.2rem;
+  line-height: 1.75;
+  max-width: 60ch;
   font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+  color: #ededed;
+}
+.bday-message-body p {
+  margin-bottom: 1rem;
+}
+.small-message {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
 }
 
+/* ==== Devanagari styling ==== */
 .devanagari {
   display: block;
   margin-top: 1.2rem;
@@ -236,6 +246,7 @@ body {
   font-family: 'Noto Sans Devanagari', Arial, sans-serif;
 }
 
+/* ==== Responsive ==== */
 @media (max-width: 900px) {
   .no-scroll {
     overflow: visible !important;
@@ -246,65 +257,33 @@ body {
     align-items: center;
     gap: 1.2rem;
     padding: 0.5rem 0;
-    min-height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-    margin: 0;
-  }
-  .bday-photo-figure {
-    margin-bottom: 0.5rem;
-    width: 100vw;
-    max-width: 100vw;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
   }
   .bday-photo-rect {
     width: 90vw;
     max-width: 320px;
     height: auto;
     aspect-ratio: 11/15;
-    margin: 0 auto;
-    display: block;
   }
   .bday-photo-legend {
     max-width: 95vw;
     font-size: 0.95rem;
-    text-align: center;
-    margin: 0.5rem auto 0.8rem auto;
   }
   .bday-message-section {
     align-items: center;
-    max-width: 100vw;
-    width: 100vw;
+    max-width: 95vw;
     padding: 0 0.5rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
   }
   .bday-heading {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     text-align: center;
-    margin-bottom: 0.7rem;
-    margin-top: 0.5rem;
   }
   .bday-message-body, .small-message {
-    font-size: 0.95rem;
+    font-size: 1rem;
     text-align: center;
-    word-break: break-word;
-    width: 100vw;
-    max-width: 100vw;
-    margin: 0 auto;
-    padding-bottom: 1.5rem;
   }
 }
 
-@keyframes confetti {
-  0% { background-position: 0 0, 0 0, 0 0; }
-  100% { background-position: 100px 60px, 80px 60px, 50px 60px; }
-}
-
+/* ==== Confetti blast ==== */
 .confetti-blast {
   pointer-events: none;
   position: fixed;
@@ -313,9 +292,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 100;
-  overflow: visible;
 }
-
 .confetti-piece {
   position: absolute;
   top: 50%;
@@ -326,64 +303,16 @@ body {
   opacity: 0.85;
   animation: confetti-blast-fall 1.8s cubic-bezier(.6,.3,.3,1) forwards;
 }
-
-/* 8 color/angle variations for variety */
-.confetti-piece-0 { background: #ffb800; transform: rotate(12deg); animation-delay: 0.0s; }
-.confetti-piece-1 { background: #ff4d6d; transform: rotate(-8deg); animation-delay: 0.1s; }
-.confetti-piece-2 { background: #fff; transform: rotate(24deg); animation-delay: 0.2s; }
-.confetti-piece-3 { background: #6ee7b7; transform: rotate(-16deg); animation-delay: 0.05s; }
-.confetti-piece-4 { background: #60a5fa; transform: rotate(32deg); animation-delay: 0.15s; }
-.confetti-piece-5 { background: #f472b6; transform: rotate(-24deg); animation-delay: 0.12s; }
-.confetti-piece-6 { background: #fde68a; transform: rotate(8deg); animation-delay: 0.18s; }
-.confetti-piece-7 { background: #a78bfa; transform: rotate(-32deg); animation-delay: 0.08s; }
-
+.confetti-piece-0 { background: #ffb800; --x: -220px; --y: -320px; --angle: 12deg; }
+.confetti-piece-1 { background: #ff4d6d; --x: 180px; --y: -340px; --angle: -8deg; }
+.confetti-piece-2 { background: #fff; --x: -120px; --y: -300px; --angle: 24deg; }
+.confetti-piece-3 { background: #6ee7b7; --x: 90px; --y: -260px; --angle: -16deg; }
+.confetti-piece-4 { background: #60a5fa; --x: -180px; --y: -220px; --angle: 32deg; }
+.confetti-piece-5 { background: #f472b6; --x: 220px; --y: -200px; --angle: -24deg; }
+.confetti-piece-6 { background: #fde68a; --x: -60px; --y: -180px; --angle: 8deg; }
+.confetti-piece-7 { background: #a78bfa; --x: 140px; --y: -120px; --angle: -32deg; }
 @keyframes confetti-blast-fall {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(var(--angle, 0deg));
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform:
-      translate(
-        calc(-50% + var(--x, 0px)),
-        calc(-50% + var(--y, 0px))
-      )
-      scale(0.9)
-      rotate(var(--angle, 0deg));
-  }
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(var(--angle)); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.9) rotate(var(--angle)); }
 }
 
-/* Custom properties for each piece (JS-free, just CSS randomness) */
-.confetti-piece-0 { --x: -220px; --y: -320px; --angle: 12deg; }
-.confetti-piece-1 { --x: 180px; --y: -340px; --angle: -8deg; }
-.confetti-piece-2 { --x: -120px; --y: -300px; --angle: 24deg; }
-.confetti-piece-3 { --x: 90px; --y: -260px; --angle: -16deg; }
-.confetti-piece-4 { --x: -180px; --y: -220px; --angle: 32deg; }
-.confetti-piece-5 { --x: 220px; --y: -200px; --angle: -24deg; }
-.confetti-piece-6 { --x: -60px; --y: -180px; --angle: 8deg; }
-.confetti-piece-7 { --x: 140px; --y: -120px; --angle: -32deg; }
-.confetti-piece-8 { --x: -200px; --y: -100px; --angle: 16deg; }
-.confetti-piece-9 { --x: 200px; --y: -80px; --angle: -12deg; }
-.confetti-piece-10 { --x: -100px; --y: -60px; --angle: 28deg; }
-.confetti-piece-11 { --x: 120px; --y: -40px; --angle: -20deg; }
-.confetti-piece-12 { --x: -160px; --y: -20px; --angle: 36deg; }
-.confetti-piece-13 { --x: 160px; --y: 0px; --angle: -28deg; }
-.confetti-piece-14 { --x: -80px; --y: 20px; --angle: 20deg; }
-.confetti-piece-15 { --x: 80px; --y: 40px; --angle: -36deg; }
-.confetti-piece-16 { --x: -140px; --y: 60px; --angle: 10deg; }
-.confetti-piece-17 { --x: 140px; --y: 80px; --angle: -10deg; }
-.confetti-piece-18 { --x: -60px; --y: 100px; --angle: 18deg; }
-.confetti-piece-19 { --x: 60px; --y: 120px; --angle: -18deg; }
-.confetti-piece-20 { --x: -100px; --y: 140px; --angle: 22deg; }
-.confetti-piece-21 { --x: 100px; --y: 160px; --angle: -22deg; }
-.confetti-piece-22 { --x: -40px; --y: 180px; --angle: 14deg; }
-.confetti-piece-23 { --x: 40px; --y: 200px; --angle: -14deg; }
-
-.small-message {
-  font-size: 0.98rem;
-  line-height: 1.45;
-} 
