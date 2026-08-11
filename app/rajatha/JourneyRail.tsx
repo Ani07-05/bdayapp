@@ -2,17 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const STOPS = ["Birthday", "Speed", "ML", "Mind", "Style", "Namaste", "Always"];
+const STOPS = ["Birthday", "Speed", "ML", "Style", "Namaste", "Always"];
 
 export default function JourneyRail() {
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const container = document.querySelector<HTMLElement>(".rj-page");
+    if (!container) return;
+
     const update = () => {
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - doc.clientHeight;
-      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      const max = container.scrollHeight - container.clientHeight;
+      const pct = max > 0 ? (container.scrollTop / max) * 100 : 0;
       setProgress(Math.min(100, Math.max(0, pct)));
       rafRef.current = null;
     };
@@ -23,11 +25,11 @@ export default function JourneyRail() {
       }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    container.addEventListener("scroll", onScroll, { passive: true });
     update();
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      container.removeEventListener("scroll", onScroll);
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
   }, []);

@@ -7,16 +7,48 @@
 .rj-page {
   background: #fafaf7;
   color: #1c1a17;
+  height: 100svh;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* ---------------- Frame (normal continuous scroll, not one-at-a-time) ---------------- */
+/* ---------------- Frame — each section is a full-screen card that snaps into place ---------------- */
 .rj-frame {
+  position: relative;
   display: flex;
   align-items: center;
   border-bottom: 1px dashed rgba(28, 26, 23, 0.16);
   padding: 3.6rem 1.4rem;
   box-sizing: border-box;
+  min-height: 100svh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
+
+/* PPT-style "doors" transition: each card starts covered by two solid panels
+   meeting at the centerline; when it snaps into view they swing open to the
+   sides like double doors, revealing the card underneath. */
+.rj-frame::before,
+.rj-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: #fafaf7;
+  z-index: 45;
+  transition: transform 0.9s cubic-bezier(.65, 0, .35, 1);
+  pointer-events: none;
+}
+.rj-frame::before { left: 0; transform: translateX(0); }
+.rj-frame::after { right: 0; transform: translateX(0); }
+.rj-frame.in-view::before { transform: translateX(-100%); }
+.rj-frame.in-view::after { transform: translateX(100%); }
 
 .rj-frame-inner {
   max-width: 1220px;
@@ -104,6 +136,22 @@
 .rj-body em { font-style: italic; color: #6b3d20; }
 .rj-body u { text-decoration-color: #c94a3a; text-underline-offset: 3px; }
 
+/* Bigger, more declamatory body copy for the Matterhorn message — and the
+   "2" / "1" call out huge since they're a hidden "21", the birthday itself. */
+.rj-body--big {
+  font-size: clamp(1.1rem, 2vw, 1.34rem);
+  line-height: 1.6;
+}
+.rj-num {
+  display: inline-block;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  line-height: 1;
+  color: #c94a3a;
+  transform: translateY(0.08em);
+}
+
 .rj-tag {
   display: inline-flex;
   align-items: center;
@@ -135,12 +183,43 @@
     linear-gradient(rgba(176, 170, 160, 0.35) 0.5px, transparent 0.5px),
     linear-gradient(90deg, rgba(176, 170, 160, 0.35) 0.5px, transparent 0.5px);
   background-size: 16px 16px;
-  box-shadow: 0 2px 28px rgba(28, 26, 23, 0.05), inset 0 0 0 1px rgba(28, 26, 23, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.rj-panel svg { width: 78%; height: 78%; overflow: visible; }
+.rj-panel svg { width: 90%; height: 90%; overflow: visible; }
+
+/* Stitched-artwork panels have no visible box of their own — the embroidery
+   sits directly on the page, no grid-paper card behind it. */
+.rj-panel--bare {
+  background: none;
+}
+
+/* ---------------- Stitch icon — embroidered-thread artwork you can touch ---------------- */
+.rj-stitch-wrap {
+  position: relative;
+  width: 84%;
+  height: 84%;
+  animation-name: rj-stitch-breathe;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  transform-origin: center;
+  touch-action: pan-y;
+  cursor: pointer;
+}
+.rj-stitch-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@keyframes rj-stitch-breathe {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.015) rotate(0.6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rj-stitch-wrap { animation: none; }
+}
 
 .rj-panel-caption {
   margin: 0.6rem 0 0;
@@ -177,102 +256,11 @@
   50% { opacity: 1; transform: scale(1.7); }
 }
 
-/* ---------------- F1 shape — real car artwork, ink-toned to match the panel ---------------- */
+/* ---------------- F1 shape — stitched Matterhorn artwork ---------------- */
 .rj-panel--f1 { position: relative; overflow: hidden; }
-.rj-track-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.rj-car-track {
-  stroke: rgba(28, 26, 23, 0.5);
-  stroke-dasharray: 6 8;
-  animation: rj-track 1.4s linear infinite;
-}
-@keyframes rj-track { to { stroke-dashoffset: -28; } }
-.rj-speedline {
-  stroke: rgba(201, 74, 58, 0.55);
-  stroke-width: 2;
-  stroke-linecap: round;
-  animation: rj-speed 1.1s ease-in-out infinite;
-}
-@keyframes rj-speed {
-  0% { opacity: 0; transform: translateX(14px); }
-  40% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-10px); }
-}
 
-.rj-car-img {
-  position: relative;
-  z-index: 2;
-  width: 58%;
-  height: auto;
-  filter: drop-shadow(0 6px 10px rgba(28, 26, 23, 0.16));
-  animation: rj-lap 4.6s cubic-bezier(.45,0,.2,1) infinite;
-}
-@keyframes rj-lap {
-  0% { transform: translateX(-140%) translateY(2px) rotate(0deg); opacity: 0; }
-  8% { opacity: 1; }
-  46% { transform: translateX(0%) translateY(-3px) rotate(-1deg); }
-  50% { transform: translateX(6%) translateY(1px) rotate(1deg); }
-  92% { opacity: 1; }
-  100% { transform: translateX(160%) translateY(2px) rotate(0deg); opacity: 0; }
-}
-
-/* ---------------- ML shape (node graph — packets hitting nodes) ---------------- */
-.rj-node {
-  fill: #fff;
-  stroke: #1c1a17;
-  stroke-width: 1.6;
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: rj-nodepulse 2.6s ease-in-out infinite;
-}
-.rj-node--hub { animation-duration: 1.9s; }
-.rj-edge {
-  stroke: rgba(28, 26, 23, 0.28);
-  stroke-width: 1.3;
-  stroke-dasharray: 3 5;
-  animation: rj-edgeflow 2.8s linear infinite;
-}
-.rj-packet {
-  fill: #c94a3a;
-  animation: rj-packet-move 2.2s linear infinite;
-}
-@keyframes rj-nodepulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.18); }
-}
-@keyframes rj-edgeflow { to { stroke-dashoffset: -16; } }
-@keyframes rj-packet-move {
-  0% { offset-distance: 0%; opacity: 0; transform: scale(0.6); }
-  8% { opacity: 1; transform: scale(1); }
-  82% { opacity: 1; transform: scale(1); }
-  94% { transform: scale(1.9); }
-  100% { offset-distance: 100%; opacity: 0; transform: scale(0.4); }
-}
-
-/* ---------------- Mind / philosophy shape (illusion circles) ---------------- */
-.rj-orbit {
-  fill: none;
-  stroke: #1c1a17;
-  stroke-width: 1.4;
-  stroke-dasharray: 3 6;
-  transform-origin: center;
-  animation: rj-spin 16s linear infinite;
-}
-.rj-orbit--rev { animation-direction: reverse; stroke: #c94a3a; animation-duration: 22s; }
-@keyframes rj-spin { to { transform: rotate(360deg); } }
-
-/* ---------------- Style / travel shape (real Japan map) ---------------- */
+/* ---------------- Style / travel shape ---------------- */
 .rj-panel--japan { position: relative; }
-.rj-japan-map {
-  width: 62%;
-  height: 62%;
-  object-fit: contain;
-  opacity: 0.88;
-}
 
 /* ---------------- Journey rail — the whole page as one trip ---------------- */
 .rj-rail {
@@ -374,14 +362,27 @@
   background: #c94a3a;
   margin: 1.4rem auto 0;
 }
+.rj-greet-note {
+  font-family: ui-sans-serif, -apple-system, 'Segoe UI', Arial, sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+  line-height: 1.7;
+  color: #4b463c;
+  max-width: 46ch;
+  margin: 1.4rem auto 0;
+}
 
-/* ---------------- Outro frame ---------------- */
+/* ---------------- Outro frame — small, plain closing card ---------------- */
 .rj-frame--outro {
-  min-height: 60svh;
+  min-height: 55svh;
+  min-height: 55vh;
   border-bottom: none;
   text-align: center;
+  justify-content: center;
 }
-.rj-frame--outro .rj-frame-inner { display: flex; flex-direction: column; }
+.rj-frame--outro .rj-frame-inner {
+  display: flex;
+  flex-direction: column;
+}
 .rj-outro-sign {
   font-family: 'PP Editorial New', Arial, sans-serif;
   font-style: italic;
@@ -394,6 +395,54 @@
   letter-spacing: 0.04em;
   color: #8f8878;
   margin: 0;
+}
+
+/* ---------------- Hero highlight (subtle gold glow to mark the first card) ---------------- */
+.rj-panel--hero {
+  position: relative;
+  animation: rj-hero-glow 3.6s ease-in-out infinite;
+}
+@keyframes rj-hero-glow {
+  0%, 100% {
+    box-shadow: 0 2px 28px rgba(28, 26, 23, 0.05), inset 0 0 0 1px rgba(28, 26, 23, 0.05), 0 0 0 0 rgba(207, 161, 74, 0);
+  }
+  50% {
+    box-shadow: 0 2px 34px rgba(28, 26, 23, 0.08), inset 0 0 0 1px rgba(207, 161, 74, 0.45), 0 0 30px 6px rgba(207, 161, 74, 0.24);
+  }
+}
+
+/* ---------------- Confetti — covers the whole screen while the hero card is active ---------------- */
+.rj-confetti {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.rj-frame--hero.in-view .rj-confetti {
+  opacity: 1;
+}
+.rj-confetti-piece {
+  position: absolute;
+  top: -8%;
+  width: 6px;
+  height: 12px;
+  border-radius: 1px;
+  opacity: 0;
+  animation-name: rj-confetti-fall;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+.rj-confetti-piece:nth-child(3n) { background: #c94a3a; }
+.rj-confetti-piece:nth-child(3n + 1) { background: #cfa14a; }
+.rj-confetti-piece:nth-child(3n + 2) { background: #1c1a17; }
+@keyframes rj-confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(112vh) rotate(300deg); opacity: 0; }
 }
 
 /* ---------------- Champagne glass (hero) ---------------- */
@@ -436,6 +485,67 @@
   transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1);
 }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------------- Song prompt — full-screen veil, blurred background ---------------- */
+.rj-sound-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem;
+  background: rgba(250, 250, 247, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: rj-veil-in 0.4s ease-out;
+}
+@keyframes rj-veil-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.rj-sound-prompt {
+  max-width: 320px;
+  width: 100%;
+  padding: 1.8rem 1.7rem;
+  border: 1px dashed rgba(28, 26, 23, 0.35);
+  border-radius: 18px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(28, 26, 23, 0.18);
+  animation: rj-prompt-in 0.45s cubic-bezier(.2,.7,.2,1);
+}
+@keyframes rj-prompt-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.rj-sound-prompt-text {
+  margin: 0 0 1.2rem;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-size: 1.28rem;
+  color: #1c1a17;
+}
+.rj-sound-prompt-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.rj-sound-prompt-yes,
+.rj-sound-prompt-no {
+  border: 1px dashed rgba(28, 26, 23, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.rj-sound-prompt-yes { background: #1c1a17; color: #fafaf7; border-color: #1c1a17; }
+.rj-sound-prompt-yes:hover,
+.rj-sound-prompt-no:hover { transform: translateY(-1px); }
 
 /* ---------------- Ambient sound toggle ---------------- */
 .rj-sound-toggle {
@@ -483,17 +593,68 @@
   50% { height: 14px; }
 }
 
+/* ---------------- Phones — same full-screen cards, same doors transition, just quicker ----------------
+   Snap stays mandatory + stop:always (inherited from .rj-frame) so a swipe always
+   lands on exactly one card, never skips past it. */
+@media (max-width: 720px) {
+  .rj-frame::before,
+  .rj-frame::after {
+    transition-duration: 0.6s;
+  }
+
+  /* Hero stacks into a big square photo under the heading on phones — not a tiny
+     framed circle, but not a full-bleed background either. Confetti is fixed to
+     the viewport (see .rj-confetti) so it still covers the whole screen. */
+  .rj-frame--hero .rj-frame-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    width: 100%;
+  }
+  .rj-frame--hero .rj-frame-inner .rj-frame-text {
+    flex: none;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+  }
+  .rj-frame--hero .rj-frame-inner .rj-frame-shape {
+    flex: none;
+    align-self: center;
+    width: 84%;
+    max-width: 360px;
+  }
+  .rj-frame--hero .rj-panel--hero {
+    aspect-ratio: 1 / 1;
+    max-width: none;
+    border-radius: 22px;
+  }
+  .rj-frame--hero .rj-hero-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+  }
+  .rj-frame--hero .rj-champagne { width: 13%; min-width: 34px; max-width: 46px; }
+}
+
 /* ---------------- Small screens ---------------- */
 @media (max-width: 480px) {
-  .rj-frame { padding: 3.4rem 1.1rem; }
+  .rj-frame:not(.rj-frame--hero) { padding: 3.4rem 1.1rem; }
   .rj-panel { max-width: 280px; }
   .rj-sound-toggle { left: 0.8rem; bottom: 0.8rem; padding: 0 0.9rem; font-size: 0.82rem; }
+  .rj-sound-prompt { padding: 1.5rem 1.3rem; }
+  .rj-sound-prompt-text { font-size: 1.1rem; }
 }
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .rj-car-body, .rj-car-track, .rj-speedline, .rj-node, .rj-edge, .rj-orbit, .rj-route-dot, .rj-hero-dot {
+  .rj-hero-dot, .rj-confetti-piece, .rj-panel--hero {
     animation: none !important;
   }
   .reveal { transition-duration: 0.01ms; }
+  .rj-frame::before,
+  .rj-frame::after {
+    transition-duration: 0.01ms;
+  }
+  .rj-page { scroll-snap-type: none; }
 }
