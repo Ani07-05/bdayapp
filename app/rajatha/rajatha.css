@@ -1,0 +1,499 @@
+/* ================================================================
+   Rajatha's birthday page — a vertical, one-frame-at-a-time journey.
+   Paper/grid aesthetic, dashed dividers, line-art shapes per theme.
+   Scoped to /rajatha only. Does not touch shared .bday-* classes.
+   ================================================================ */
+
+.rj-page {
+  background: #fafaf7;
+  color: #1c1a17;
+}
+
+/* ---------------- Frame (normal continuous scroll, not one-at-a-time) ---------------- */
+.rj-frame {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed rgba(28, 26, 23, 0.16);
+  padding: 3.6rem 1.4rem;
+  box-sizing: border-box;
+}
+
+.rj-frame-inner {
+  max-width: 1220px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Shape + message sit side by side in a normal flex row, on every screen size
+   including phone — the row grows with whichever column is taller, so text
+   can never overlap the shape. rj-flip mirrors which side the shape sits on. */
+.rj-frame-inner:has(.rj-frame-shape) {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.rj-frame-inner:has(.rj-frame-shape) .rj-frame-shape {
+  flex: 0 0 auto;
+  width: 34%;
+  max-width: 168px;
+  align-self: flex-start;
+}
+.rj-frame-inner:has(.rj-frame-shape) .rj-frame-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  align-self: flex-end;
+  text-align: right;
+}
+.rj-frame-inner:has(.rj-frame-shape) .rj-frame-text .rj-body { margin-left: auto; }
+
+.rj-frame-inner.rj-flip:has(.rj-frame-shape) { flex-direction: row-reverse; }
+.rj-frame-inner.rj-flip:has(.rj-frame-shape) .rj-frame-text {
+  text-align: left;
+}
+.rj-frame-inner.rj-flip:has(.rj-frame-shape) .rj-frame-text .rj-body { margin-left: 0; margin-right: auto; }
+
+@media (min-width: 900px) {
+  .rj-frame-inner:has(.rj-frame-shape) { gap: 3rem; }
+  .rj-frame-inner:has(.rj-frame-shape) .rj-frame-shape {
+    width: 38%;
+    max-width: 360px;
+  }
+  .rj-frame-inner:has(.rj-frame-shape) .rj-frame-text {
+    max-width: 520px;
+  }
+}
+
+.rj-frame-text { min-width: 0; }
+.rj-frame-shape { min-width: 0; }
+
+.rj-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8f8878;
+  margin-bottom: 1rem;
+}
+.rj-eyebrow b {
+  font-weight: 700;
+  color: #1c1a17;
+}
+
+.rj-heading {
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.3rem, 5.6vw, 3.9rem);
+  line-height: 1.06;
+  margin: 0 0 1rem 0;
+  color: #1c1a17;
+  text-wrap: balance;
+}
+
+.rj-body {
+  font-family: ui-sans-serif, -apple-system, 'Segoe UI', Arial, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.14rem);
+  line-height: 1.68;
+  color: #4b463c;
+  max-width: 52ch;
+}
+.rj-body p { margin: 0 0 1rem 0; }
+.rj-body strong { color: #1c1a17; font-weight: 700; }
+.rj-body em { font-style: italic; color: #6b3d20; }
+.rj-body u { text-decoration-color: #c94a3a; text-underline-offset: 3px; }
+
+.rj-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px dashed rgba(28, 26, 23, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1c1a17;
+  margin-top: 1.3rem;
+}
+.rj-tag--accent { border-color: #c94a3a; color: #c94a3a; }
+
+/* ---------------- Grid-paper decorative panel ---------------- */
+.rj-panel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #f3f1ec;
+  background-image:
+    radial-gradient(circle at center, #d4d0c8 0.6px, transparent 0.6px),
+    linear-gradient(rgba(176, 170, 160, 0.35) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, rgba(176, 170, 160, 0.35) 0.5px, transparent 0.5px);
+  background-size: 16px 16px;
+  box-shadow: 0 2px 28px rgba(28, 26, 23, 0.05), inset 0 0 0 1px rgba(28, 26, 23, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rj-panel svg { width: 78%; height: 78%; overflow: visible; }
+
+.rj-panel-caption {
+  margin: 0.6rem 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(28, 26, 23, 0.4);
+  text-align: center;
+}
+
+/* ---------------- Hero frame ---------------- */
+.rj-frame--hero .rj-frame-shape { width: 46%; max-width: 240px; }
+.rj-frame--hero .rj-panel { max-width: 460px; }
+.rj-hero-photo {
+  width: 74%;
+  height: 74%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px dashed rgba(28, 26, 23, 0.3);
+  box-shadow: 0 18px 36px rgba(28, 26, 23, 0.14);
+  position: relative;
+  z-index: 2;
+}
+.rj-hero-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c94a3a;
+  animation: rj-pop 2.6s ease-in-out infinite;
+}
+@keyframes rj-pop {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.7); }
+}
+
+/* ---------------- F1 shape — real car artwork, ink-toned to match the panel ---------------- */
+.rj-panel--f1 { position: relative; overflow: hidden; }
+.rj-track-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.rj-car-track {
+  stroke: rgba(28, 26, 23, 0.5);
+  stroke-dasharray: 6 8;
+  animation: rj-track 1.4s linear infinite;
+}
+@keyframes rj-track { to { stroke-dashoffset: -28; } }
+.rj-speedline {
+  stroke: rgba(201, 74, 58, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: rj-speed 1.1s ease-in-out infinite;
+}
+@keyframes rj-speed {
+  0% { opacity: 0; transform: translateX(14px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-10px); }
+}
+
+.rj-car-img {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(28, 26, 23, 0.16));
+  animation: rj-lap 4.6s cubic-bezier(.45,0,.2,1) infinite;
+}
+@keyframes rj-lap {
+  0% { transform: translateX(-140%) translateY(2px) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  46% { transform: translateX(0%) translateY(-3px) rotate(-1deg); }
+  50% { transform: translateX(6%) translateY(1px) rotate(1deg); }
+  92% { opacity: 1; }
+  100% { transform: translateX(160%) translateY(2px) rotate(0deg); opacity: 0; }
+}
+
+/* ---------------- ML shape (node graph — packets hitting nodes) ---------------- */
+.rj-node {
+  fill: #fff;
+  stroke: #1c1a17;
+  stroke-width: 1.6;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: rj-nodepulse 2.6s ease-in-out infinite;
+}
+.rj-node--hub { animation-duration: 1.9s; }
+.rj-edge {
+  stroke: rgba(28, 26, 23, 0.28);
+  stroke-width: 1.3;
+  stroke-dasharray: 3 5;
+  animation: rj-edgeflow 2.8s linear infinite;
+}
+.rj-packet {
+  fill: #c94a3a;
+  animation: rj-packet-move 2.2s linear infinite;
+}
+@keyframes rj-nodepulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+@keyframes rj-edgeflow { to { stroke-dashoffset: -16; } }
+@keyframes rj-packet-move {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(0.6); }
+  8% { opacity: 1; transform: scale(1); }
+  82% { opacity: 1; transform: scale(1); }
+  94% { transform: scale(1.9); }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(0.4); }
+}
+
+/* ---------------- Mind / philosophy shape (illusion circles) ---------------- */
+.rj-orbit {
+  fill: none;
+  stroke: #1c1a17;
+  stroke-width: 1.4;
+  stroke-dasharray: 3 6;
+  transform-origin: center;
+  animation: rj-spin 16s linear infinite;
+}
+.rj-orbit--rev { animation-direction: reverse; stroke: #c94a3a; animation-duration: 22s; }
+@keyframes rj-spin { to { transform: rotate(360deg); } }
+
+/* ---------------- Style / travel shape (real Japan map) ---------------- */
+.rj-panel--japan { position: relative; }
+.rj-japan-map {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+  opacity: 0.88;
+}
+
+/* ---------------- Journey rail — the whole page as one trip ---------------- */
+.rj-rail {
+  position: fixed;
+  right: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 66vh;
+  z-index: 55;
+  display: none;
+}
+@media (min-width: 720px) {
+  .rj-rail { display: block; }
+}
+
+.rj-rail-track {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  margin: 0 auto;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(28, 26, 23, 0.25) 0 4px,
+    transparent 4px 9px
+  );
+}
+
+.rj-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  background: #c94a3a;
+  opacity: 0.7;
+  transition: height 0.05s linear;
+}
+
+.rj-rail-car {
+  position: absolute;
+  left: 50%;
+  width: 26px;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transition: top 0.05s linear;
+}
+.rj-rail-car img { width: 100%; height: auto; display: block; }
+
+.rj-rail-stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rj-rail-stops li {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transform: translateY(-50%);
+}
+.rj-rail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fafaf7;
+  border: 1.5px solid rgba(28, 26, 23, 0.4);
+  transform: translateX(-2.5px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.rj-rail-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(28, 26, 23, 0.45);
+  white-space: nowrap;
+  transform: translateX(6px);
+  transition: color 0.2s ease;
+}
+.rj-rail-stops li.is-active .rj-rail-dot {
+  background: #c94a3a;
+  border-color: #c94a3a;
+  transform: translateX(-2.5px) scale(1.3);
+}
+.rj-rail-stops li.is-active .rj-rail-label { color: #1c1a17; font-weight: 600; }
+
+/* ---------------- Greeting frame ---------------- */
+.rj-frame--greet { align-items: center; text-align: center; }
+.rj-frame--greet .rj-frame-inner { display: flex; flex-direction: column; }
+.rj-greet-text {
+  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+  font-size: clamp(1.15rem, 3vw, 1.55rem);
+  line-height: 1.8;
+  color: #1c1a17;
+  max-width: 46ch;
+  margin: 0 auto;
+}
+.rj-greet-rule {
+  width: 46px;
+  height: 1px;
+  background: #c94a3a;
+  margin: 1.4rem auto 0;
+}
+
+/* ---------------- Outro frame ---------------- */
+.rj-frame--outro {
+  min-height: 60svh;
+  border-bottom: none;
+  text-align: center;
+}
+.rj-frame--outro .rj-frame-inner { display: flex; flex-direction: column; }
+.rj-outro-sign {
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: #6b3d20;
+  margin: 0 0 0.6rem 0;
+}
+.rj-outro-ps {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: #8f8878;
+  margin: 0;
+}
+
+/* ---------------- Champagne glass (hero) ---------------- */
+.rj-champagne {
+  position: absolute;
+  right: -6px;
+  bottom: 2%;
+  width: 17%;
+  min-width: 52px;
+  max-width: 72px;
+  z-index: 3;
+  filter: drop-shadow(0 6px 10px rgba(28, 26, 23, 0.18));
+}
+.rj-glass-outline {
+  fill: none;
+  stroke: #1c1a17;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.rj-glass-fill {
+  fill: #cfa14a;
+  opacity: 0.85;
+}
+.rj-bubble {
+  fill: #fff8ea;
+  opacity: 0;
+  animation: rj-bubble-rise 2.4s ease-in infinite;
+}
+@keyframes rj-bubble-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.2; }
+  100% { transform: translateY(-22px); opacity: 0; }
+}
+
+/* ---------------- Scroll-in reveal (per frame content) ---------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------------- Ambient sound toggle ---------------- */
+.rj-sound-toggle {
+  position: fixed;
+  left: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0 1.1rem;
+  border: 1px dashed rgba(28, 26, 23, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #1c1a17;
+  font-family: 'PP Editorial New', Arial, sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(28, 26, 23, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.rj-sound-toggle:hover { transform: translateY(-2px); }
+.rj-sound-toggle.is-on { background: #1c1a17; color: #fafaf7; border-color: #1c1a17; }
+
+.rj-sound-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.rj-sound-bars i {
+  width: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  height: 5px;
+  opacity: 0.7;
+}
+.rj-sound-toggle.is-on .rj-sound-bars i { animation: rj-bars 0.9s ease-in-out infinite; opacity: 1; }
+.rj-sound-bars i:nth-child(1) { animation-delay: 0s; }
+.rj-sound-bars i:nth-child(2) { animation-delay: 0.15s; }
+.rj-sound-bars i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes rj-bars {
+  0%, 100% { height: 5px; }
+  50% { height: 14px; }
+}
+
+/* ---------------- Small screens ---------------- */
+@media (max-width: 480px) {
+  .rj-frame { padding: 3.4rem 1.1rem; }
+  .rj-panel { max-width: 280px; }
+  .rj-sound-toggle { left: 0.8rem; bottom: 0.8rem; padding: 0 0.9rem; font-size: 0.82rem; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .rj-car-body, .rj-car-track, .rj-speedline, .rj-node, .rj-edge, .rj-orbit, .rj-route-dot, .rj-hero-dot {
+    animation: none !important;
+  }
+  .reveal { transition-duration: 0.01ms; }
+}
