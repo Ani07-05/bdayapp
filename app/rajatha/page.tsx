@@ -36,7 +36,7 @@ export default function RajathaPage() {
       <Oneko />
 
       {/* 01 — Hero */}
-      <Frame className="rj-frame--hero">
+      <Frame className="rj-frame--hero" gate="sound">
         <div className="rj-frame-inner">
           <div className="rj-frame-text">
             <ScrollReveal index={0}>
@@ -89,6 +89,11 @@ export default function RajathaPage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="rj-scroll-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 4 V20 M12 20 L6 14 M12 20 L18 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
       </Frame>
 

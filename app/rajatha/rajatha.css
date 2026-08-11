@@ -397,6 +397,30 @@
   margin: 0;
 }
 
+/* ---------------- Scroll-down hint (hero only) ---------------- */
+.rj-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  z-index: 6;
+  color: #1c1a17;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.5s;
+  pointer-events: none;
+}
+.rj-frame--hero.in-view .rj-scroll-hint { opacity: 0.55; }
+.rj-scroll-hint svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  animation: rj-hint-bounce 1.8s ease-in-out infinite;
+}
+@keyframes rj-hint-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
 /* ---------------- Hero highlight (subtle gold glow to mark the first card) ---------------- */
 .rj-panel--hero {
   position: relative;
@@ -495,9 +519,9 @@
   align-items: center;
   justify-content: center;
   padding: 1.4rem;
-  background: rgba(250, 250, 247, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* Fully opaque — the hero card underneath must not be visible at all until
+     this is dismissed, not just blurred/tinted. */
+  background: #fafaf7;
   animation: rj-veil-in 0.4s ease-out;
 }
 @keyframes rj-veil-in {
@@ -648,7 +672,7 @@
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .rj-hero-dot, .rj-confetti-piece, .rj-panel--hero {
+  .rj-hero-dot, .rj-confetti-piece, .rj-panel--hero, .rj-scroll-hint svg {
     animation: none !important;
   }
   .reveal { transition-duration: 0.01ms; }

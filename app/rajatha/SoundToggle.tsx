@@ -35,12 +35,17 @@ export default function SoundToggle() {
     setPlaying(true);
   };
 
-  const playSong = () => {
-    seekAndPlay();
+  const answered = () => {
     setAsked(true);
+    window.dispatchEvent(new Event("rj:sound-answered"));
   };
 
-  const dismiss = () => setAsked(true);
+  const playSong = () => {
+    seekAndPlay();
+    answered();
+  };
+
+  const dismiss = () => answered();
 
   const toggle = () => {
     const audio = audioRef.current;
